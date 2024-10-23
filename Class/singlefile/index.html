@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        .auth-container {
+            width: 25%; /* 1/4th of the page */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 30px; /* Circular style */
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 30px; /* Circular style */
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Initial password input color (red) */
+        input[type="password"].weak {
+            background-color: #ff4d4d; /* Red */
+        }
+
+        input[type="password"].medium {
+            background-color: #ffcc00; /* Orange */
+        }
+
+        input[type="password"].strong {
+            background-color: #66cc66; /* Green */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>Login</h2>
+        <form action="#" method="POST">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script>
+        // Grab the password input field
+        const passwordField = document.getElementById('password');
+
+        // Add an event listener to detect typing in the password field
+        passwordField.addEventListener('input', function() {
+            const passwordValue = passwordField.value;
+            
+            // Remove previous classes for weak, medium, and strong
+            passwordField.classList.remove('weak', 'medium', 'strong');
+
+            // Check the password strength based on its content and length
+            if (passwordValue.length < 6) {
+                // Weak: Password is less than 6 characters
+                passwordField.classList.add('weak');
+            } else if (passwordValue.length >= 6 && /[a-zA-Z]/.test(passwordValue) && /\d/.test(passwordValue)) {
+                // Medium: At least 6 characters with letters and numbers
+                passwordField.classList.add('medium');
+            } else if (passwordValue.length >= 8 && /[a-zA-Z]/.test(passwordValue) && /\d/.test(passwordValue) && /[!@#$%^&*(),.?":{}|<>]/.test(passwordValue)) {
+                // Strong: At least 8 characters with letters, numbers, and special characters
+                passwordField.classList.add('strong');
+            }
+        });
+    </script>
+
+</body>
+</html>

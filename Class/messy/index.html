@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compact Password Validation</title>
+    <style>
+        body {display: flex;justify-content: center;align-items: center;height: 100vh;margin: 0;background-color: #f4f4f4;font-family: Arial, sans-serif;}
+        .auth-container {width: 25%; /* 1/4th of the page */background-color: #fff;padding: 20px;border-radius: 10px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);text-align: center;}
+        input[type="text"], input[type="email"], input[type="password"] {width: 100%;padding: 10px;margin: 10px 0;border: 1px solid #ccc;border-radius: 30px; /* Circular style */box-sizing: border-box;font-size: 16px;transition: background-color 0.3s ease;}
+        input[type="submit"] {width: 100%;padding: 10px;margin-top: 10px;background-color: #4CAF50;color: white;border: none;border-radius: 30px; /* Circular style */font-size: 16px;cursor: pointer;}
+        input[type="submit"]:hover {background-color: #45a049;}
+        /* Password input background color based on strength */
+        input[type="password"].weak {background-color: #ff4d4d; /* Red */}
+        input[type="password"].medium {background-color: #ffcc00; /* Orange */}
+        input[type="password"].strong {background-color: #66cc66; /* Green */}
+        .valid {color: green;}
+        .invalid {color: red;  }
+    </style>
+</head>
+<body>
+
+<div class="auth-container">
+    <!-- <h1>Concept of Clean Code & Authentication Levels : Salting, Hashing, Encryption, OAuth and OAuth2</h1> -->
+    <form action="#" method="POST">
+        <h2>Authentication</h2>
+        <input type="email" name="email" placeholder="Email" required> <!-- Email input -->
+        <input type="password" id="password" name="password" placeholder="Password" required oninput="
+            let p = this.value;
+            document.getElementById('letter').className = (/[a-z]/.test(p)) ? 'valid' : 'invalid';
+            document.getElementById('capital').className = (/[A-Z]/.test(p)) ? 'valid' : 'invalid';
+            document.getElementById('number').className = (/[0-9]/.test(p)) ? 'valid' : 'invalid';
+            document.getElementById('length').className = (p.length >= 8) ? 'valid' : 'invalid';">
+        <input type="submit" value="Submit"> <!-- Submit button -->
+    </form>
+
+    <p id="letter" class="invalid">Lowercase required</p>
+    <p id="capital" class="invalid">Uppercase required</p>
+    <p id="number" class="invalid">Number required</p>
+    <p id="length" class="invalid">At least 8 characters</p>
+</div>
+
+</body>
+</html>
